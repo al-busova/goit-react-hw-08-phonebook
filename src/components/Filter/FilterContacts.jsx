@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
+import {Label, Input} from '../commonStyles'
 export const FilterContacts = ({ value, onChange }) => {
   return (
     <>
-      <label htmlFor="filter">Filter contacts by name</label>
-      <input
+      <Label htmlFor="filter">Filter contacts by name</Label>
+      <Input
         type="text"
         name="filter"
         id="filter"

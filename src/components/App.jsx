@@ -2,6 +2,8 @@ import { Component } from 'react';
 import FormContacts from './FormContacts/FormContacts';
 import { ContactList } from 'components/Contacts/ContactsList';
 import { FilterContacts } from 'components/Filter/FilterContacts';
+import { MainTitle } from './commonStyles';
+import { Box } from './Box';
 
 export default class App extends Component {
   state = {
@@ -58,12 +60,10 @@ export default class App extends Component {
 
   render() {
     return (
-      <>
-        <div>
-          <h2>Phonebook</h2>
+      <main>
+        <MainTitle>Phonebook</MainTitle>
           <FormContacts onSubmit={this.addContact} />
-        </div>
-        <div>
+        <Box color= 'darkgreen' mr = 'auto' ml='auto' width ='50%' fontSize ='l' textAlign ='center'>
           <h2>Contacts</h2>
           <FilterContacts
             value={this.state.filter}
@@ -73,8 +73,8 @@ export default class App extends Component {
             contacts={this.getFilterContacts()}
             deleteContact={this.deleteContact}
           />
-        </div>
-      </>
+        </Box>
+      </main>
     );
   }
 }

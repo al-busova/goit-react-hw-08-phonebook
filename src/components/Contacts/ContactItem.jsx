@@ -1,10 +1,14 @@
 import PropTypes from "prop-types";
+import { Button } from "components/commonStyles";
+import {WrapperContact, NameContact} from './Contacts.styled'
 export const ContactItem = ({ name, number, deleteContact}) => {
      return (
          <>
-             <p>{name}</p>
-         <span>{number}</span>
-         <button type="button" onClick={() => deleteContact(name)}>Delete</button>
+             <WrapperContact>
+                 <NameContact>{name}: </NameContact>
+                 <span>{number}</span>
+             </WrapperContact> 
+         <Button  type="button" onClick={() => deleteContact(name)}>Delete</Button>
    </>
   );
 }
