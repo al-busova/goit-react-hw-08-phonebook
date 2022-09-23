@@ -9,6 +9,7 @@ export const ContactList = ({ contacts, deleteContact }) => {
           <ContactItem
             name={contact.name}
             number={contact.number}
+            id ={contact.id}
             deleteContact={deleteContact}
           />
         </ItemContacts>
@@ -21,6 +22,7 @@ ContactList.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
       deleteContact: PropTypes.func.isRequired,
     })
   ),

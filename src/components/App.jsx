@@ -43,10 +43,10 @@ export default class App extends Component {
     });
   };
 
-  deleteContact = name => {
+  deleteContact = id=> {
     this.setState(prev => {
       const newContacts = prev.contacts.filter(
-        contact => contact.name !== name
+        contact => contact.id !== id
       );
       return {
         contacts: newContacts,
@@ -55,7 +55,7 @@ export default class App extends Component {
   };
   isDuplicate({ name }) {
     const { contacts } = this.state;
-    return contacts.find(contact => contact.name === name);
+    return contacts.find(contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase());
   }
 
   render() {

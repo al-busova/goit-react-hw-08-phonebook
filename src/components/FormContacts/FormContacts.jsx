@@ -7,11 +7,12 @@ import { Form} from './FormContacts.styled';
 export default class FormContacts extends Component {
   state = {
     name: '',
-    number: '',
+    number: ''
   };
 
 nameId = nanoid();
-    telId = nanoid();    
+  telId = nanoid(); 
+  
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
