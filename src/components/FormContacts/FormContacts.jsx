@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { Button } from '../App/App.styled';
+import PropTypes from "prop-types";
 
 export default class FormContacts extends Component {
   state = {
@@ -51,3 +52,6 @@ nameId = nanoid();
     );
   }
 }
+FormContacts.propTypes = {
+  onSubmit: PropTypes.func.isRequired, 
+};
