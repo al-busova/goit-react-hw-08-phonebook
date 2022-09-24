@@ -4,6 +4,7 @@ import { ContactList } from 'components/Contacts/ContactsList';
 import { FilterContacts } from 'components/Filter/FilterContacts';
 import { MainTitle } from './commonStyles';
 import { Box } from './Box';
+const CONTACTS = 'contacts';
 
 export default class App extends Component {
   state = {
@@ -15,6 +16,18 @@ export default class App extends Component {
     ],
     filter: '',
   };
+  componentDidMount() {
+    const parsedContacts = JSON.parse(localStorage.getItem(CONTACTS));
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+  
+  componentDidUpdate(_, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem(CONTACTS, JSON.stringify(this.state.contacts));
+  }
+}
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
