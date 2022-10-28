@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import {Label, Input} from '../commonStyles'
+import { Label, Input } from '../commonStyles';
+
 export const FilterContacts = ({ value, onChange }) => {
   return (
     <>

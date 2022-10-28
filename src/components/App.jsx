@@ -1,30 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getContacts, getFilter } from 'redux/selectors';
+import { getContactsFilter } from 'redux/filterSlice';
 import { FormContacts } from './FormContacts/FormContacts';
 import { ContactList } from 'components/Contacts/ContactsList';
 import { FilterContacts } from 'components/Filter/FilterContacts';
 import { MainTitle } from './commonStyles';
 import { Box } from './Box';
-const CONTACTS = 'contacts';
 
 export const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    return JSON.parse(window.localStorage.getItem(CONTACTS))
-      ?? [
-        { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-        { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-        { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-        { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-      ]
-  });
-  const [filter, setFilter] = useState('');
-  
-  useEffect(() => {
-    window.localStorage.setItem(CONTACTS, JSON.stringify(contacts));
-  }, [contacts]);
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
+  const dispatch = useDispatch();
 
   const handleChange = e => {
     if (e.target.name === 'filter') {
-      setFilter(e.target.value);
+      dispatch(getContactsFilter(e.target.value))
     }
   };
 
@@ -39,30 +29,10 @@ export const App = () => {
     return filterContacts;
   };
 
-  const addContact = contact => {
-    if (isDuplicate(contact)) {
-      return alert(`${contact.name} is already in contacts.`);
-    }
-    setContacts(prev => [...prev, contact]);
-  };
-
-  const deleteContact = id => {
-    setContacts(prev => {
-      const newContacts = prev.filter(contact => contact.id !== id);
-      return newContacts;
-    });
-  };
-
-  const isDuplicate = ({ name }) => {
-    return contacts.find(
-      contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase()
-    );
-  };
-
   return (
     <main>
       <MainTitle>Phonebook</MainTitle>
-      <FormContacts onSubmit={addContact} />
+      <FormContacts />
       <Box
         color="darkgreen"
         mr="auto"
@@ -75,7 +45,6 @@ export const App = () => {
         <FilterContacts value={filter} onChange={handleChange} />
         <ContactList
           contacts={getFilterContacts()}
-          deleteContact={deleteContact}
         />
       </Box>
     </main>

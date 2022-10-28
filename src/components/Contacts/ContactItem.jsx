@@ -1,14 +1,20 @@
 import PropTypes from "prop-types";
 import { Button } from "components/commonStyles";
-import {WrapperContact, NameContact} from './Contacts.styled'
-export const ContactItem = ({ name, number, id, deleteContact}) => {
+import { WrapperContact, NameContact } from './Contacts.styled';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/contactsSlice';
+
+export const ContactItem = ({ name, number, id }) => {
+    
+  const dispatch = useDispatch();
+
      return (
          <>
              <WrapperContact>
                  <NameContact>{name}: </NameContact>
                  <span>{number}</span>
              </WrapperContact> 
-         <Button  type="button" onClick={() => deleteContact(id)}>Delete</Button>
+         <Button  type="button" onClick={() => dispatch(deleteContact(id))}>Delete</Button>
    </>
   );
 }
@@ -16,6 +22,5 @@ export const ContactItem = ({ name, number, id, deleteContact}) => {
 ContactItem.propTypes = {
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    deleteContact: PropTypes.func.isRequired
+    id: PropTypes.string.isRequired
 };
