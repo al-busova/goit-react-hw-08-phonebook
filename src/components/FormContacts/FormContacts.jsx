@@ -2,14 +2,16 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Button, Input, Label } from '../commonStyles';
 import { Form } from './FormContacts.styled';
-import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/contactsOperations';
 
 export const FormContacts = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
+  const contactItems = useSelector(getContacts);
   const dispatch = useDispatch();
+  
   const nameId = nanoid();
   const telId = nanoid();
 
@@ -28,7 +30,16 @@ export const FormContacts = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(addContact(name, number));
+    const isDuplicate = contactItems.find(
+      contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase()
+    );
+    if (isDuplicate) {
+      alert(`${name} is already in contacts.`);
+      setName('');
+      setNumber('');
+      return;
+    }
+    dispatch(addContact({ name, number }));
     setName('');
     setNumber('');
   };
@@ -66,4 +77,3 @@ export const FormContacts = () => {
     </Form>
   );
 };
-

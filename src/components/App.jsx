@@ -5,6 +5,7 @@ import { MainTitle } from './commonStyles';
 import { Box } from './Box';
 
 export const App = () => {
+
   return (
     <main>
       <MainTitle>Phonebook</MainTitle>
