@@ -1,8 +1,11 @@
-import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
-import { Container, Header, Link } from './AppBar.styled';
+
+import { Container, Header, Link, AuthMenu } from './AppBar.styled';
 import { UserMenu } from './UserMenu';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from 'redux/auth/selectorsAuth';
+
 export const AppBar = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
     <Container>
       <Header>
@@ -10,18 +13,17 @@ export const AppBar = () => {
           <Link to="/" end>
             Home
           </Link>
-          <Link to="/contacts">Contacts</Link>
-          <div>
+          {isLoggedIn && <Link to="/contacts">Contacts</Link>}
+        </nav>
+        {isLoggedIn ? (
+          <UserMenu />
+        ) : (
+          <AuthMenu>
             <Link to="/registration">Registration</Link>
             <Link to="/login">Login</Link>
-          </div>
-        </nav>
-        <UserMenu />
+          </AuthMenu>
+        )}
       </Header>
-      <Suspense fallback={null}>
-        {' '}
-        <Outlet />
-      </Suspense>
     </Container>
   );
 };

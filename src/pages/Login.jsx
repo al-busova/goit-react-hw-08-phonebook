@@ -1,14 +1,18 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
 import { logIn } from 'redux/auth/authOperations';
+import { selectIsLoadingAuth } from 'redux/auth/selectorsAuth';
 
-export const Login = () => {
+ const Login = () => {
+  const loginId = nanoid();
+     const passwordIdLogg = nanoid();
+     const isLoading = useSelector(selectIsLoadingAuth);
   const dispatch = useDispatch();
 
   const schema = yup.object().shape({
-    email: yup.string().email(),
+    email: yup.string().required(),
     password: yup.string().min(7).max(16).required(),
   });
 
@@ -19,9 +23,7 @@ export const Login = () => {
 
   const handleSubmit = (values, actions) => {
     dispatch(logIn({ email: values.email, password: values.password }));
-    toast('Loggined!');
     actions.resetForm();
-    console.log(values);
   };
   return (
     <main>
@@ -31,20 +33,21 @@ export const Login = () => {
         onSubmit={handleSubmit}
       >
         <Form autoComplete="off">
-          <label htmlFor="email">
+          <label htmlFor={loginId}>
             Login/Email
-            <Field type="email" name="email" />
+            <Field type="text" name="email" id={loginId} placeholder='enter your login'/>
             <ErrorMessage name="email" component="div" />
           </label>
-          <label htmlFor="password">
+          <label htmlFor={passwordIdLogg}>
             Password
-            <Field type="password" name="password" />
+            <Field type="password" name="password" id={passwordIdLogg} placeholder='enter password'/>
             <ErrorMessage name="password" component="div" />
           </label>
 
-          <button type="submit">Зайти</button>
+          <button type="submit">{isLoading ? <>Loading...</> : <>Go in</>}</button>
         </Form>
       </Formik>
     </main>
   );
 };
+export default Login;

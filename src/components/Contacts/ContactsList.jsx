@@ -36,14 +36,15 @@ export const ContactList = () => {
   return (
     <>
       {isLoading && contactItems.length === 0 &&  <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {/* {error && <p>{error}</p>} */}
+       {error && <p>You not logged</p>}
       {contactItems.length > 0 && (
         <ListContacts>
           {filteredContacts.map(contact => (
             <ItemContacts key={contact.id}>
               <ContactItem
                 name={contact.name}
-                number={contact.phone}
+                number={contact.number}
                 id={contact.id}
               />
             </ItemContacts>

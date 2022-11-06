@@ -18,9 +18,21 @@ export const Header = styled.header`
 
   > nav {
     display: flex;
+      align-items: center;
+  justify-content: space-between;
   }
 `;
+export const AuthMenu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: ${props => props.theme.space[4]}px;
+  padding: ${props => props.theme.space[3]}px 0;
 
+  > nav {
+    display: flex;
+  }
+`;
 export const Link = styled(NavLink)`
   padding: ${props => props.theme.space[3]}px ${props => props.theme.space[4]}px;
   border-radius: ${props => props.theme.space[2]}px;

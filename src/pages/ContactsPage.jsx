@@ -3,7 +3,7 @@ import { ContactList } from 'components/Contacts/ContactsList';
 import { FilterContacts } from 'components/Filter/FilterContacts';
 import { Box } from '../components/Box';
 
-export const ContactsPage = () => {
+const ContactsPage = () => {
   return (
     <main>
       <FormContacts />
@@ -22,3 +22,4 @@ export const ContactsPage = () => {
     </main>
   );
 };
+export default ContactsPage;

@@ -1,16 +1,20 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
 import { registration } from 'redux/auth/authOperations';
+import { selectIsLoadingAuth } from 'redux/auth/selectorsAuth';
 
-export const Registration = () => {
-
+ const Registration = () => {
+  const nameIdReg = nanoid();
+  const emailIdReg = nanoid();
+     const passwordIdReg = nanoid();
+     const isLoading = useSelector(selectIsLoadingAuth);
   const dispatch = useDispatch();
 
   const schema = yup.object().shape({
     name: yup.string().required(),
-    email: yup.string().email(),
+    email: yup.string().email().required(),
     password: yup.string().min(7).max(16).required(),
   });
 
@@ -21,8 +25,13 @@ export const Registration = () => {
   };
 
   const handleSubmit = (values, actions) => {
-    dispatch(registration({ name: values.name, email: values.email, password: values.password }));
-    toast('Registered!');
+    dispatch(
+      registration({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+      })
+    );
     actions.resetForm();
     console.log(values);
   };
@@ -34,35 +43,27 @@ export const Registration = () => {
         onSubmit={handleSubmit}
       >
         <Form autoComplete="off">
-          <label htmlFor="name">
+          <label htmlFor={nameIdReg}>
             Name
-            <Field
-              type="text"
-              name="name"
-            />
+            <Field id={nameIdReg} type="text" name="name" placeholder ='create name' />
             <ErrorMessage name="name" />
           </label>
 
-          <label htmlFor="email">
+          <label htmlFor={emailIdReg}>
             Email
-            <Field
-              type="email"
-              name="email"
-            />
+            <Field id={emailIdReg} type="email" name="email" placeholder ='enter email' />
             <ErrorMessage name="email" component="div" />
           </label>
 
-          <label htmlFor="password">
+          <label htmlFor={passwordIdReg}>
             Password
-            <Field
-              type="password"
-              name="password"
-            />
+            <Field id={passwordIdReg} type="password" name="password" placeholder ='create password'  />
             <ErrorMessage name="password" />
           </label>
-          <button type="submit">Зайти</button>
+          <button type="submit">{isLoading ? <>Loading...</> : <>Зарегестрироваться</>}</button>
         </Form>
       </Formik>
     </main>
   );
 };
+export default Registration;
