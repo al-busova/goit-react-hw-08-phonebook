@@ -6,9 +6,9 @@ import {
   selectError,
   selectFilter,
   selectIsLoading,
-} from 'redux/selectors';
+} from 'redux/contacts/selectorsContacts';
 import { ListContacts, ItemContacts } from './Contacts.styled';
-import { fetchContacts } from 'redux/contactsOperations';
+import { fetchContacts } from 'redux/contacts/contactsOperations';
 
 export const ContactList = () => {
   const contactItems = useSelector(selectContacts);

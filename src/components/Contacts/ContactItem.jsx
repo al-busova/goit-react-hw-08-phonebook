@@ -4,8 +4,8 @@ import { WrapperContact, NameContact } from './Contacts.styled';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoading } from 'redux/selectors';
-import { deleteContact } from 'redux/contactsOperations';
+import { selectIsLoading } from 'redux/contacts/selectorsContacts';
+import { deleteContact } from 'redux/contacts/contactsOperations';
 
 export const ContactItem = ({ name, number, id }) => {
   const [isDeleting, setIsDeleting] = useState(false);

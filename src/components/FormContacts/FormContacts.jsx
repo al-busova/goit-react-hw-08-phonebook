@@ -4,8 +4,8 @@ import { toast } from 'react-toastify';
 import { Button, Input, Label } from '../commonStyles';
 import { Form } from './FormContacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts, selectIsLoading } from 'redux/selectors';
-import { addContact } from 'redux/contactsOperations';
+import { selectContacts, selectIsLoading } from 'redux/contacts/selectorsContacts';
+import { addContact } from 'redux/contacts/contactsOperations';
 
 export const FormContacts = () => {
   const [name, setName] = useState('');

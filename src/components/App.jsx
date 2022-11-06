@@ -1,30 +1,23 @@
-import { FormContacts } from './FormContacts/FormContacts';
-import { ContactList } from 'components/Contacts/ContactsList';
-import { FilterContacts } from 'components/Filter/FilterContacts';
-import { MainTitle } from './commonStyles';
-import { Box } from './Box';
+// import { lazy } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Home, ContactsPage, Login, Registration  } from 'pages';
+import { AppBar } from './AppBar/AppBar';
 
 export const App = () => {
-
   return (
-    <main>
-      <MainTitle>Phonebook</MainTitle>
-      <FormContacts />
-      <Box
-        color="darkgreen"
-        mr="auto"
-        ml="auto"
-        width="50%"
-        fontSize="l"
-        textAlign="center"
-      >
-        <h2>Contacts</h2>
-        <FilterContacts />
-        <ContactList/>
-      </Box>
+  <>
+      <Routes>
+        <Route path="/" element={<AppBar />}>
+          <Route index element={<Home />} />
+          <Route path="/contacts" element={<ContactsPage />} />
+          <Route path="/registration" element={<Registration/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="*" element={<p>Page not found.</p>} />
+        </Route>
+      </Routes>
       <ToastContainer autoClose={1000} />
-    </main>
+      </>
   );
 };
