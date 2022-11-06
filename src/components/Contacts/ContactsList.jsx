@@ -35,7 +35,7 @@ export const ContactList = () => {
 
   return (
     <>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && contactItems.length === 0 &&  <p>Loading...</p>}
       {error && <p>{error}</p>}
       {contactItems.length > 0 && (
         <ListContacts>

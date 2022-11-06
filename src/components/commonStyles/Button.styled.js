@@ -7,10 +7,9 @@ color:${props => props.theme.colors.orange} ;
 background-color: ${props => props.theme.colors.darkgreen} ;
 border: ${props => `1px solid ${props.theme.colors.darkgreen}`};
 border-radius: 4px;
-:hover, :focus {
+:hover, :active {
     cursor: pointer;
     color: ${props => props.theme.colors.darkgreen} ;
     background-color: ${props => props.theme.colors.orange} ;
 }
-
 `;

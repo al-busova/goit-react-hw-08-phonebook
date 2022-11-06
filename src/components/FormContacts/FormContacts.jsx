@@ -1,19 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
+import { toast } from 'react-toastify';
 import { Button, Input, Label } from '../commonStyles';
 import { Form } from './FormContacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
+import { selectContacts, selectIsLoading } from 'redux/selectors';
 import { addContact } from 'redux/contactsOperations';
 
 export const FormContacts = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const [isAddOn, setIsAddOn] = useState(false);
   const contactItems = useSelector(selectContacts);
+  const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
-  
+
   const nameId = nanoid();
   const telId = nanoid();
+
+  useEffect(() => {
+    setIsAddOn(false);
+  }, [contactItems]);
 
   const handleChange = e => {
     switch (e.target.name) {
@@ -35,11 +42,11 @@ export const FormContacts = () => {
     );
     if (isDuplicate) {
       alert(`${name} is already in contacts.`);
-      setName('');
-      setNumber('');
       return;
     }
     dispatch(addContact({ name, number }));
+    toast('Contact added.');
+    setIsAddOn(true);
     setName('');
     setNumber('');
   };
@@ -73,7 +80,10 @@ export const FormContacts = () => {
           required
         />
       </div>
-      <Button type="submit">Add contact</Button>
+      <Button type="submit">
+        {' '}
+        {isAddOn && isLoading ? <>Loading...</> : <>Add contact</>}
+      </Button>
     </Form>
   );
 };
