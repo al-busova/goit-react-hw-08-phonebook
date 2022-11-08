@@ -1,3 +1,4 @@
+import { Button } from 'components/commonStyles';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logOut } from 'redux/auth/authOperations';
@@ -7,10 +8,11 @@ export const UserMenu = () => {
   const nameUser = useSelector(selectUserName);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   return (
     <div>
-      <span>Hello, {nameUser}!</span>
-      <button
+      <span>Hello, {nameUser}! </span>
+      <Button
         type="button"
         onClick={() => {
           dispatch(logOut());
@@ -18,7 +20,7 @@ export const UserMenu = () => {
         }}
       >
         Logout
-      </button>
+      </Button>
     </div>
   );
 };

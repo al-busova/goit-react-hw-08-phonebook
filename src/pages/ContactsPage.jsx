@@ -11,8 +11,8 @@ const ContactsPage = () => {
         color="darkgreen"
         mr="auto"
         ml="auto"
-        width="50%"
-        fontSize="l"
+        width="55%"
+        fontSize="m"
         textAlign="center"
       >
         <h2>Contacts</h2>

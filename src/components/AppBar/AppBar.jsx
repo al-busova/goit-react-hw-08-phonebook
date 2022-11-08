@@ -1,4 +1,3 @@
-
 import { Container, Header, Link, AuthMenu } from './AppBar.styled';
 import { UserMenu } from './UserMenu';
 import { useSelector } from 'react-redux';
@@ -7,8 +6,8 @@ import { selectIsLoggedIn } from 'redux/auth/selectorsAuth';
 export const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
-    <Container>
-      <Header>
+    <Header>
+      <Container>
         <nav>
           <Link to="/" end>
             Home
@@ -23,7 +22,7 @@ export const AppBar = () => {
             <Link to="/login">Login</Link>
           </AuthMenu>
         )}
-      </Header>
-    </Container>
+      </Container>
+    </Header>
   );
 };

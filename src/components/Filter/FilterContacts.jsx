@@ -15,14 +15,16 @@ export const FilterContacts = () => {
 
   return (
     <>
-      <Label htmlFor="filter">Filter contacts by name</Label>
-      <Input
-        type="text"
-        name="filter"
-        id="filter"
-        value={filter}
-        onChange={handleChange}
-      />
+      <Label htmlFor="filter">
+        <span>Filter contacts by name</span>
+        <Input
+          type="text"
+          name="filter"
+          id="filter"
+          value={filter}
+          onChange={handleChange}
+        />{' '}
+      </Label>
     </>
   );
 };

@@ -1,14 +1,21 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { logIn } from 'redux/auth/authOperations';
 import { selectIsLoadingAuth } from 'redux/auth/selectorsAuth';
+import {
+  Button,
+  FormFormik,
+  InputFormik,
+  Label,
+  ErrorText,
+} from 'components/commonStyles';
 
- const Login = () => {
+const Login = () => {
   const loginId = nanoid();
-     const passwordIdLogg = nanoid();
-     const isLoading = useSelector(selectIsLoadingAuth);
+  const passwordIdLogg = nanoid();
+  const isLoading = useSelector(selectIsLoadingAuth);
   const dispatch = useDispatch();
 
   const schema = yup.object().shape({
@@ -32,20 +39,31 @@ import { selectIsLoadingAuth } from 'redux/auth/selectorsAuth';
         validationSchema={schema}
         onSubmit={handleSubmit}
       >
-        <Form autoComplete="off">
-          <label htmlFor={loginId}>
-            Login/Email
-            <Field type="text" name="email" id={loginId} placeholder='enter your login'/>
-            <ErrorMessage name="email" component="div" />
-          </label>
-          <label htmlFor={passwordIdLogg}>
-            Password
-            <Field type="password" name="password" id={passwordIdLogg} placeholder='enter password'/>
-            <ErrorMessage name="password" component="div" />
-          </label>
-
-          <button type="submit">{isLoading ? <>Loading...</> : <>Go in</>}</button>
-        </Form>
+        <FormFormik autoComplete="off">
+          <Label htmlFor={loginId}>
+            <span>Login/Email</span>
+            <InputFormik
+              type="text"
+              name="email"
+              id={loginId}
+              placeholder="Enter your login"
+            />
+          </Label>
+          <ErrorText name="email" component="p" />
+          <Label htmlFor={passwordIdLogg}>
+            <span>Password</span>
+            <InputFormik
+              type="password"
+              name="password"
+              id={passwordIdLogg}
+              placeholder="Enter password"
+            />
+          </Label>
+          <ErrorText name="password" component="p" />
+          <Button type="submit">
+            {isLoading ? <>Loading...</> : <>Login</>}
+          </Button>
+        </FormFormik>
       </Formik>
     </main>
   );

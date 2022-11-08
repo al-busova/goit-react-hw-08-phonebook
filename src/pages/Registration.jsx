@@ -1,15 +1,22 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { registration } from 'redux/auth/authOperations';
 import { selectIsLoadingAuth } from 'redux/auth/selectorsAuth';
+import {
+  Label,
+  Button,
+  FormFormik,
+  InputFormik,
+  ErrorText,
+} from 'components/commonStyles';
 
- const Registration = () => {
+const Registration = () => {
   const nameIdReg = nanoid();
   const emailIdReg = nanoid();
-     const passwordIdReg = nanoid();
-     const isLoading = useSelector(selectIsLoadingAuth);
+  const passwordIdReg = nanoid();
+  const isLoading = useSelector(selectIsLoadingAuth);
   const dispatch = useDispatch();
 
   const schema = yup.object().shape({
@@ -42,26 +49,41 @@ import { selectIsLoadingAuth } from 'redux/auth/selectorsAuth';
         validationSchema={schema}
         onSubmit={handleSubmit}
       >
-        <Form autoComplete="off">
-          <label htmlFor={nameIdReg}>
-            Name
-            <Field id={nameIdReg} type="text" name="name" placeholder ='create name' />
-            <ErrorMessage name="name" />
-          </label>
-
-          <label htmlFor={emailIdReg}>
-            Email
-            <Field id={emailIdReg} type="email" name="email" placeholder ='enter email' />
-            <ErrorMessage name="email" component="div" />
-          </label>
-
-          <label htmlFor={passwordIdReg}>
-            Password
-            <Field id={passwordIdReg} type="password" name="password" placeholder ='create password'  />
-            <ErrorMessage name="password" />
-          </label>
-          <button type="submit">{isLoading ? <>Loading...</> : <>Зарегестрироваться</>}</button>
-        </Form>
+        <FormFormik autoComplete="off">
+          <Label htmlFor={nameIdReg}>
+            <span>Name</span>
+            <InputFormik
+              id={nameIdReg}
+              type="text"
+              name="name"
+              placeholder="Create name"
+            />
+          </Label>
+          <ErrorText name="name" component="p" />
+          <Label htmlFor={emailIdReg}>
+            <span>Email</span>
+            <InputFormik
+              id={emailIdReg}
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+            />
+          </Label>
+          <ErrorText name="email" component="p" />
+          <Label htmlFor={passwordIdReg}>
+            <span>Password</span>
+            <InputFormik
+              id={passwordIdReg}
+              type="password"
+              name="password"
+              placeholder="Create password"
+            />
+          </Label>
+          <ErrorText name="password" component="p" />
+          <Button type="submit">
+            {isLoading ? <>Loading...</> : <>Register</>}
+          </Button>
+        </FormFormik>
       </Formik>
     </main>
   );

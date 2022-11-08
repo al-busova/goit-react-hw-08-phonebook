@@ -9,17 +9,22 @@ import {
 } from 'redux/contacts/selectorsContacts';
 import { ListContacts, ItemContacts } from './Contacts.styled';
 import { fetchContacts } from 'redux/contacts/contactsOperations';
+import { selectIsLoggedIn } from 'redux/auth/selectorsAuth';
 
 export const ContactList = () => {
   const contactItems = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const error = useSelector(selectError);
   const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      return;
+    }
     dispatch(fetchContacts());
-  }, [dispatch]);
+  }, [isLoggedIn, dispatch]);
 
   const getFilterContacts = () => {
     if (!filter) {
@@ -35,9 +40,8 @@ export const ContactList = () => {
 
   return (
     <>
-      {isLoading && contactItems.length === 0 &&  <p>Loading...</p>}
-      {/* {error && <p>{error}</p>} */}
-       {error && <p>You not logged</p>}
+      {isLoading && contactItems.length === 0 && <p>Loading...</p>}
+      {error && <p>{error}</p>}
       {contactItems.length > 0 && (
         <ListContacts>
           {filteredContacts.map(contact => (

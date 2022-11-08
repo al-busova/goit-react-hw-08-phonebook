@@ -4,6 +4,7 @@ export const ListContacts = styled.ul`
 list-style: none;
 padding: 0 ${props => props.theme.space[4]}px;
 `;
+
 export const ItemContacts = styled.li`
 display: flex;
 justify-content: space-between;

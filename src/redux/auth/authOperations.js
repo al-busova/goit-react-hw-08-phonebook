@@ -18,11 +18,11 @@ export const registration = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post('/users/signup', credentials);
-      toast('Registered!');
+      toast('Сongratulations, you are registered!');
       token.set(response.data.token);
       return response.data;
     } catch (e) {
-      toast('Уже Registered!');
+      toast.error(' User already registered!');
       return thunkAPI.rejectWithValue(e.message);
     }
   }
@@ -37,7 +37,7 @@ export const logIn = createAsyncThunk(
       token.set(response.data.token);
       return response.data;
     } catch (e) {
-      toast('no login!');
+      toast.error('Wrong username or password entered!');
       return thunkAPI.rejectWithValue(e.message);
     }
   }
@@ -61,8 +61,8 @@ export const fetchCurrentUser = createAsyncThunk(
     }
     token.set(tokenSaved);
     try {
-        const response = await axios.get('/users/current');
-        return response.data;
+      const response = await axios.get('/users/current');
+      return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
