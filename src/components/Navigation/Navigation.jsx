@@ -1,4 +1,4 @@
-import { Container, Header, Link, AuthMenu } from './AppBar.styled';
+import { Container, Header, Link, AuthMenu } from './Navigation.styled';
 import { UserMenu } from './UserMenu';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from 'redux/auth/selectorsAuth';

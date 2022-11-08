@@ -22,6 +22,10 @@ export const Header = styled.header`
   margin-bottom: ${props => props.theme.space[4]}px;
   border-bottom: ${props => props.theme.space[1] / 2}px solid
     ${props => props.theme.colors.darkgreen};
+    background-image: linear-gradient(
+    to bottom,
+    rgba(255, 165, 0, 0.8), rgba(0, 128, 0, 0.8) 
+  );
   button {
     font-size: ${props => props.theme.fontSizes.s}px;
     padding: ${props => props.theme.space[3]}px

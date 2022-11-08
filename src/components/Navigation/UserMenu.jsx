@@ -1,3 +1,4 @@
+import { Box } from 'components/Box';
 import { Button } from 'components/commonStyles';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +11,7 @@ export const UserMenu = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <Box color="darkgreen">
       <span>Hello, {nameUser}! </span>
       <Button
         type="button"
@@ -21,6 +22,6 @@ export const UserMenu = () => {
       >
         Logout
       </Button>
-    </div>
+    </Box>
   );
 };

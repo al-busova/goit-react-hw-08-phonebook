@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppBar } from './AppBar/AppBar';
+import { AppBar } from './Navigation/Navigation';
 import { fetchCurrentUser } from 'redux/auth/authOperations';
 import { selectIsFetchingCurrentUser } from 'redux/auth/selectorsAuth';
 import  PublicRoute  from 'pages/PublicRoute';
@@ -16,9 +16,9 @@ const Login = lazy(() => import('../pages/Login'));
 export const App = () => {
   const dispatch = useDispatch();
   const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
+  
   useEffect(() => {
     dispatch(fetchCurrentUser());
-   
   }, [dispatch]);
 
   return (
