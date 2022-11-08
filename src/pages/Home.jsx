@@ -6,7 +6,7 @@ const Home = () => {
     <main>
       <Box color="darkgreen" mr="auto" ml="auto" width="70%" fontSize="m">
         <MainTitle>
-          Welcome to the <b>Phonebook</b>!
+          Welcome to <b>Phonebook</b>!
         </MainTitle>
         <p>For you:</p>{' '}
         <ul>

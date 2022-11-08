@@ -3,16 +3,17 @@ import { Button } from 'components/commonStyles';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logOut } from 'redux/auth/authOperations';
-import { selectUserName } from 'redux/auth/selectorsAuth';
+import { selectUserName, selectUserEmail } from 'redux/auth/selectorsAuth';
 
 export const UserMenu = () => {
   const nameUser = useSelector(selectUserName);
+  const emailUser = useSelector(selectUserEmail);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   return (
     <Box color="darkgreen">
-      <span>Hello, {nameUser}! </span>
+      <span>Hello, {nameUser}! ({emailUser}) </span>
       <Button
         type="button"
         onClick={() => {

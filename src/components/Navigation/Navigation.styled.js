@@ -24,7 +24,7 @@ export const Header = styled.header`
     ${props => props.theme.colors.darkgreen};
     background-image: linear-gradient(
     to bottom,
-    rgba(255, 165, 0, 0.8), rgba(0, 128, 0, 0.8) 
+    rgba(255, 165, 0, 0.9), rgba(0, 128, 0, 0.7) 
   );
   button {
     font-size: ${props => props.theme.fontSizes.s}px;
