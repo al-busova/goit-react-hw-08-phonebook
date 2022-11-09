@@ -31,17 +31,16 @@ const Registration = () => {
     password: '',
   };
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = ({ name, email, password }) => {
     dispatch(
       registration({
-        name: values.name,
-        email: values.email,
-        password: values.password,
+        name,
+        email,
+        password,
       })
     );
-    actions.resetForm();
-    console.log(values);
   };
+
   return (
     <main>
       <Formik

@@ -28,10 +28,10 @@ const Login = () => {
     password: '',
   };
 
-  const handleSubmit = (values, actions) => {
-    dispatch(logIn({ email: values.email, password: values.password }));
-    actions.resetForm();
+  const handleSubmit = ({email, password}) => {
+    dispatch(logIn({ email, password }));
   };
+
   return (
     <main>
       <Formik
